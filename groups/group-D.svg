@@ -18,7 +18,7 @@
     <!-- Monday 1 -->
     <g transform="translate(333,0)">
 
-<rect x="-5" y="421.0673740740487" width="124.20093542742012" height="268.83311939582126" class="m" data-href="#"/>
+<rect x="-5" y="421.067" width="124.2" height="268.83311939582126" class="m" data-href="#"/>
 
 <rect x="0" y="1024.88" width="119.416" height="590.6722" class="m" data-href="#"/>
 
@@ -38,16 +38,16 @@
     <!-- Wednesday 1 -->
     <g transform="translate(575,0)">
 
-<rect x="1" y="121.62547606399201" width="142.30893917639207" height="296.5394482646059" class="m" data-href="#"/>
+<rect x="1" y="121.6254" width="142.309" height="296.54" class="m" data-href="#"/>
 
-<rect x="0" y="422.5397421375852" width="143.4840266863721" height="258.05920552659154" class="m" data-href="#"/>
+<rect x="0" y="422.54" width="143.484" height="258.059" class="m" data-href="#"/>
 
 <rect x="-1" y="681.035" width="144.252" height="337.29" class="m" data-href="#"/>
 
     <!-- Friday 3 -->
     <g transform="translate(750,0)">
 
-<rect x="0.8557657709533" y="1018.5520741229178" width="139.05967730753252" height="289.4444495964675" class="m" data-href="#" data-index="13"></rect>
+<rect x="0.8557" y="1018.552" width="139.059" height="289.444" class="m" data-href="#" data-index="13"></rect>
 </g>
 
 <rect x="-2.5" y="1311.0987" width="142.3789" height="292.54" class="m" data-href="#"/>
@@ -70,7 +70,7 @@
     <!-- Monday 1 -->
     <g transform="translate(333,0)">
 
-<rect x="-5" y="421.0673740740487" width="124.20093542742012" height="268.83311939582126" class="m" data-href="#"/>
+<rect x="-5" y="421.067" width="124.2" height="268.833" class="m" data-href="#"/>
 
 <rect x="0" y="1024.88" width="119.416" height="590.6722" class="m" data-href="#"/>
 
@@ -90,16 +90,16 @@
     <!-- Wednesday 1 -->
     <g transform="translate(575,0)">
 
-<rect x="1" y="121.62547606399201" width="142.30893917639207" height="296.5394482646059" class="m" data-href="#"/>
+<rect x="1" y="121.625" width="142.3089" height="296.539" class="m" data-href="#"/>
 
-<rect x="0" y="422.5397421375852" width="143.4840266863721" height="258.05920552659154" class="m" data-href="#"/>
+<rect x="0" y="422.5397" width="143.484" height="258.0592" class="m" data-href="#"/>
 
 <rect x="-1" y="681.035" width="144.252" height="337.29" class="m" data-href="#"/>
 
     <!-- Friday 3 -->
     <g transform="translate(750,0)">
 
-<rect x="0.8557657709533" y="1018.5520741229178" width="139.05967730753252" height="289.4444495964675" class="m" data-href="#" data-index="13"></rect>
+<rect x="0.8557" y="1018.552" width="139.059" height="289.444" class="m" data-href="#" data-index="13"></rect>
 </g>
 
 <rect x="-2.5" y="1311.0987" width="142.3789" height="292.54" class="m" data-href="#"/>
@@ -122,7 +122,7 @@
     <!-- Monday 1 -->
     <g transform="translate(333,0)">
 
-<rect x="-5" y="421.0673740740487" width="124.20093542742012" height="268.83311939582126" class="m" data-href="#"/>
+<rect x="-5" y="421.067" width="124.2" height="268.833" class="m" data-href="#"/>
 
 <rect x="0" y="1024.88" width="119.416" height="590.6722" class="m" data-href="#"/>
 
@@ -142,17 +142,16 @@
     <!-- Wednesday 1 -->
     <g transform="translate(575,0)">
 
-<rect x="1" y="121.62547606399201" width="142.30893917639207" height="296.5394482646059" class="m" data-href="#"/>
+<rect x="1" y="121.625" width="142.3089" height="296.539" class="m" data-href="#"/>
 
-<rect x="0" y="422.5397421375852" width="143.4840266863721" height="258.05920552659154" class="m" data-href="#"/>
+<rect x="0" y="422.539" width="143.484" height="258.059" class="m" data-href="#"/>
 
 <rect x="-1" y="681.035" width="144.252" height="337.29" class="m" data-href="#"/>
 
     <!-- Friday 3 -->
     <g transform="translate(750,0)">
 
-<rect x="0.8557657709533" y="1018.5520741229178" width="139.05967730753252" height="289.4444495964675" class="m" data-href="#" data-index="13"></rect>
-</g>
+<rect x="0.8557" y="1018.552" width="139.0596" height="289.444" class="m" data-href="#"/>
 
 <rect x="-2.5" y="1311.0987" width="142.3789" height="292.54" class="m" data-href="#"/>
 </g>
