@@ -1557,3 +1557,35 @@ img, image, svg, rect {
   font-size: 13px;
   padding: 20px 0;
 }
+...................................................
+/* Container الخاص بالصورة والنص */
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* تنسيق الصورة */
+.image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* كلاس النص المتموضع فوق الصورة */
+.overlay-text {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 8px 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+
+  /* القيمة الافتراضية لرقم الأسبوع (يمكن تغييرها عبر Inline Style) */
+  --week-index: 1;
+
+  /* تطبيق التحويل: (رقم الأسبوع * 1024px) */
+  transform: translateX(calc(var(--week-index) * 1024px));
+  transition: transform 0.3s ease;
+}
