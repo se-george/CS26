@@ -18,7 +18,7 @@
 
     <!-- Saturday 3 -->
     <g transform="translate(140,0)">
-        <rect x="0" y="309" height="340.63" class="m w l" data-href="RRS/Lecture/pharma-01.pdf"/>
+        <rect x="0" y="309" height="340.63" class="m w" data-href="RRS/Lecture/pharma-01.pdf"/>
         <rect x="0" y="876" height="349" class="m w" data-href="IPC/book.pdf"/>
         <rect x="0" y="1225" height="121" class="m hw" data-href="IPC/Question/09.pdf"/>
         <rect x="57.5" y="1225" height="121" class="m hw" data-href="IPC/Answer/09.pdf"/>
