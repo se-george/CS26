@@ -256,7 +256,7 @@ export function closeOpenOptions() {
 // ---------- طرق الفتح (مُصححة ومُحسنة) ----------
 
 // 1. الفتح العارض الداخلي المدمج
-export async function openWithMozilla(item) {
+export function openWithMozilla(item) {
     if (!item) {
         console.error('❌ openWithMozilla: item is null');
         return;
@@ -294,31 +294,16 @@ export async function openWithMozilla(item) {
 
     resetBrowserZoom();
 
-    // جلب الملف وتحويله لـ Blob لتجاوز مشاكل CORS مع mozilla.github.io
-    try {
-        if (currentBlobUrl) {
-            URL.revokeObjectURL(currentBlobUrl);
-        }
-
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('تعذر جلب ملف الـ PDF');
-
-        const blob = await response.blob();
-        currentBlobUrl = URL.createObjectURL(blob);
-
-        pdfViewer.src = currentBlobUrl;
-    } catch (err) {
-        console.warn('⚠️ فشل جلب Blob، جاري استخدام الفتح المباشر:', err);
-        // Fallback إلى Google Drive إذا فشل الجلب
-        pdfViewer.src = `https://drive.google.com/viewerng/viewer?embedded=true&url=${encodeURIComponent(url)}`;
-    }
+    // 💡 استخدام قارئ PDF.js الخارجي مع إرسال الرابط المباشر
+    // دون استخدام fetch/blob لتفادي مشكلة CORS والشاشة البيضاء
+    pdfViewer.src = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(url)}#zoom=page-fit`;
 
     if (typeof trackSvgOpen === 'function') {
         trackSvgOpen(item.path);
     }
 
     closeOpenOptions();
-    console.log('📄 تم فتح المستند داخل العارض الداخلي');
+    console.log('📄 تم فتح المستند داخل Mozilla Viewer:', url);
 }
 
 // 2. الفتح عبر Google Drive
