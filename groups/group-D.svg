@@ -4,7 +4,7 @@
 
 <g transform="translate(1024,0)">
     <image data-src="image/D/01.webp" width="1024" height="2454"/>
-<text x="512" y="2300" class="m">Week 1</text>
+<text x="512" y="2300" class="m">1</text>
     <!-- Saturday 1 -->
     <g transform="translate(204.2,0)">
 
@@ -51,7 +51,7 @@
 <!-- الاسبوع الثاني -->
 <g transform="translate(2048,0)">
     <image data-src="image/D/01.webp" width="1024" height="2454"/>
-<text x="512" y="2300" class="m">Week 2</text>
+<text x="512" y="2300" class="m">2</text>
     <!-- Saturday 2 -->
     <g transform="translate(204.2,0)">
         <rect x="0" y="309" height="340.63"
@@ -99,7 +99,7 @@
 <!-- الاسبوع الثالث -->
 <g transform="translate(3072,0)">
     <image data-src="image/D/01.webp" width="1024" height="2454"/>
-<text x="512" y="2300" class="m">Week 3</text>
+<text x="512" y="2300" class="m">3</text>
     <!-- Saturday 3 -->
     <g transform="translate(204.2,0)">
         <rect x="0" y="309" height="340.63"
