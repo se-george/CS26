@@ -382,5 +382,18 @@ document.addEventListener('visibilitychange', () => {
   if (!document.hidden) checkForUpdates();
 });
 </script>
+<div class="svg-container">
+  <!-- كتابة --week: 1 / 2 / 3 يدويًا في نفس سطر الصورة -->
+  <svg xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(1024,0)">
+      <image data-src="image/D/01.webp" width="1024" height="2454" class="m" style="--week: 1;" />
+    </g>
+  </svg>
+
+  <!-- النص سيتأثر تلقائيًا بالقيمة المكتوبة في الـ SVG -->
+  <div class="overlay-text">
+    Week
+  </div>
+</div>
 </body>
 </html>
