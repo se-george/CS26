@@ -5,7 +5,6 @@
 <!-- الاسبوع الأول -->
 <g transform="translate(1024,0)">
     <image data-src="image/D/01.webp" width="1024" height="2454"/>
-
     <!-- Saturday 1 -->
     <g transform="translate(204.2,0)">
 
@@ -13,7 +12,6 @@
 
 <rect x="0" y="1026.757" width="95.73" height="591.284" class="m" data-href="#"/>
 </g>
-
     <!-- Monday 1 -->
     <g transform="translate(333,0)">
 
@@ -23,7 +21,6 @@
 
 <rect x="0" y="1615.122" width="116.888" height="340.345" class="m" data-href="#"/>
 </g>
-
     <!-- Thursday 1 -->
     <g transform="translate(454,0)">
 
@@ -33,7 +30,6 @@
 
 <rect x="0" y="1023.2156" width="119.6933" height="588.262988" class="m" data-href="#"/>
 </g>
-
     <!-- Wednesday 1 -->
     <g transform="translate(575,0)">
 
@@ -42,7 +38,7 @@
 <rect x="0" y="422.54" width="143.484" height="258.059" class="m" data-href="#"/>
 
 <rect x="-1" y="681.035" width="144.252" height="337.29" class="m" data-href="#"/>
-
+</g>
     <!-- Friday 3 -->
     <g transform="translate(750,0)">
 
@@ -56,7 +52,6 @@
 <!-- الاسبوع الثاني -->
 <g transform="translate(2048,0)">
     <image data-src="image/D/01.webp" width="1024" height="2454"/>
-
     <!-- Saturday 1 -->
     <g transform="translate(204.2,0)">
         <rect x="0" y="309" height="340.63"
@@ -65,7 +60,6 @@
 
 <rect x="0" y="1026.757" width="95.73" height="591.284" class="m" data-href="#"/>
 </g>
-
     <!-- Monday 1 -->
     <g transform="translate(333,0)">
 
@@ -75,7 +69,6 @@
 
 <rect x="0" y="1615.122" width="116.888" height="340.345" class="m" data-href="#"/>
 </g>
-
     <!-- Thursday 1 -->
     <g transform="translate(454,0)">
 
@@ -85,7 +78,6 @@
 
 <rect x="0" y="1023.2156" width="119.6933" height="588.262988" class="m" data-href="#"/>
 </g>
-
     <!-- Wednesday 1 -->
     <g transform="translate(575,0)">
 
@@ -94,12 +86,11 @@
 <rect x="0" y="422.5397" width="143.484" height="258.0592" class="m" data-href="#"/>
 
 <rect x="-1" y="681.035" width="144.252" height="337.29" class="m" data-href="#"/>
-
+</g>
     <!-- Friday 3 -->
     <g transform="translate(750,0)">
 
 <rect x="0.8557" y="1018.552" width="139.059" height="289.444" class="m" data-href="#" data-index="13"></rect>
-</g>
 
 <rect x="-2.5" y="1311.0987" width="142.3789" height="292.54" class="m" data-href="#"/>
 </g>
@@ -108,7 +99,6 @@
 <!-- الاسبوع الثالث -->
 <g transform="translate(3092,0)">
     <image data-src="image/D/01.webp" width="1024" height="2454"/>
-
     <!-- Saturday 1 -->
     <g transform="translate(204.2,0)">
         <rect x="0" y="309" height="340.63"
@@ -117,7 +107,6 @@
 
 <rect x="0" y="1026.757" width="95.73" height="591.284" class="m" data-href="#"/>
 </g>
-
     <!-- Monday 1 -->
     <g transform="translate(333,0)">
 
@@ -127,7 +116,6 @@
 
 <rect x="0" y="1615.122" width="116.888" height="340.345" class="m" data-href="#"/>
 </g>
-
     <!-- Thursday 1 -->
     <g transform="translate(454,0)">
 
@@ -137,7 +125,6 @@
 
 <rect x="0" y="1023.2156" width="119.6933" height="588.262988" class="m" data-href="#"/>
 </g>
-
     <!-- Wednesday 1 -->
     <g transform="translate(575,0)">
 
@@ -146,7 +133,7 @@
 <rect x="0" y="422.539" width="143.484" height="258.059" class="m" data-href="#"/>
 
 <rect x="-1" y="681.035" width="144.252" height="337.29" class="m" data-href="#"/>
-
+</g>
     <!-- Friday 3 -->
     <g transform="translate(750,0)">
 
