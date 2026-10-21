@@ -25,22 +25,16 @@
     <image data-src="image/F/01.webp" width="1024" height="2454"/>
 <text x="512" y="2300" class="m">5</text>
 
+<--Saturday 5-->
 <g transform="translate(0,277)">
-<rect x="827.203280982351" y="278.3176631633597" width="125.66364323998266" height="414.50241332727353" class="m" href="1"/>
-</g>
-</a>
-<a xlink:href="#" target="---" xlink:title="">
-<g>
-<rect x="679.7883979267982" y="278.5312822981046" width="145.68843216451342" height="414.55344861543693" class="image-mapper-shape" data-index="2"></rect>
-</g>
-</a>
-<a xlink:href="#" target="---" xlink:title="">
-<g>
-<rect x="534.5465245337214" y="277.3268494974298" width="145.16495592305796" height="415.49322699320345" class="image-mapper-shape" data-index="3"></rect>
-</g>
-</a>
-<a xlink:href="#" target="---" xlink:title="">
-<g>
+<rect x="827.2" y="0" width="125.66" height="414.5" class="m" data-href="1"/>
+
+<rect x="679.788" y="0" width="145.68843216451342" height="414.55344861543693" class="m" data-href="1"/>
+
+<rect x="534.5465245337214" y="0" width="145.16495592305796" height="415.49322699320345" class="m" data-href="1"/>
+
+<--Sunday 5-->
+<g transform="translate(0,697)
 <rect x="408.0341006574585" y="697.035591292994" width="125.93882369107479" height="585.6897158785835" class="image-mapper-shape" data-index="4"></rect>
 </g>
 </a>
