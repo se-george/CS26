@@ -25,7 +25,7 @@
     <image data-src="image/F/01.webp" width="1024" height="2454"/>
 <text x="512" y="2300" class="m">5</text>
 
-<--Saturday 5-->
+<--Sat5-->
 <g transform="translate(0,277)">
 <rect x="827.2" y="0" width="125.66" height="414.5" class="m" data-href="1"/>
 
@@ -33,71 +33,32 @@
 
 <rect x="534.5465245337214" y="0" width="145.16495592305796" height="415.49322699320345" class="m" data-href="1"/>
 
-<--Sunday 5-->
-<g transform="translate(0,697)
-<rect x="408.0341006574585" y="697.035591292994" width="125.93882369107479" height="585.6897158785835" class="image-mapper-shape" data-index="4"></rect>
+<--Sun5-->
+<g transform="translate(0,695)
+<rect x="408.0341006574585" y="2" width="125.93882369107479" height="585.6897158785835" class="m" data-href="1"/>
+
+<rect x="148.3699948033788" y="1" width="258.4473699035799" height="584.3937840969863" class="m" data-href="1"/>
+
+<rect x="0" y="-4" width="146.61237593278193" height="590.0587010832093" class="m" data-href="1"/>
 </g>
-</a>
-<a xlink:href="#" target="---" xlink:title="">
-<g>
-<rect x="-79.95894535733646" y="-1757.1963713183889" width="223.9720074861961" height="522.6013508011242" class="image-mapper-shape" data-index="5"></rect>
+<--tue5-->
+<g transform="translate(0,1353)
+<rect x="827.6494752160149" y="0" width="124.75120519516167" height="473.7069929754391" class="m" data-href="1"/>
+
+<rect x="534.5465245337214" y="0" width="144.60666632431924" height="477.8805859339509" class="m" data-href="1"/>
+
+<rect x="409.56648075180937" y="3" width="122.53148913057106" height="471.4428488698136" class="m" data-href="1"/>
+
+<rect x="280.0767629686582" y="2" width="125.40675802835261" height="468.2057534491146" class="m" data-href="1"/>
+
+<rect x="148.7542859665328" y="2" width="127.53727625670979" height="468.70079574430747" class="m" data-href="1"/>
 </g>
-</a>
-<a xlink:href="#" target="---" xlink:title="">
-<g>
-<rect x="32.883858853039214" y="-2126.15708071459" width="170.21872568950903" height="465.86177557128804" class="image-mapper-shape" data-index="6"></rect>
-</g>
-</a>
-<a xlink:href="#" target="---" xlink:title="">
-<g>
-<rect x="148.3699948033788" y="696.4993562294974" width="258.4473699035799" height="584.3937840969863" class="image-mapper-shape" data-index="7"></rect>
-</g>
-</a>
-<a xlink:href="#" target="---" xlink:title="">
-<g>
-<rect x="0" y="691.0611817378325" width="146.61237593278193" height="590.0587010832093" class="image-mapper-shape" data-index="8"></rect>
-</g>
-</a>
-<a xlink:href="#" target="---" xlink:title="">
-<g>
-<rect x="827.6494752160149" y="1353.8181926598147" width="124.75120519516167" height="473.7069929754391" class="image-mapper-shape" data-index="9"></rect>
-</g>
-</a>
-<a xlink:href="#" target="---" xlink:title="">
-<g>
-<rect x="534.5465245337214" y="1352.7172885865587" width="144.60666632431924" height="477.8805859339509" class="image-mapper-shape" data-index="10"></rect>
-</g>
-</a>
-<a xlink:href="#" target="---" xlink:title="">
-<g>
-<rect x="409.56648075180937" y="1356.1326429780595" width="122.53148913057106" height="471.4428488698136" class="image-mapper-shape" data-index="11"></rect>
-</g>
-</a>
-<a xlink:href="#" target="---" xlink:title="">
-<g>
-<rect x="280.0767629686582" y="1355.660566562541" width="125.40675802835261" height="468.2057534491146" class="image-mapper-shape" data-index="12"></rect>
-</g>
-</a>
-<a xlink:href="#" target="---" xlink:title="">
-<g>
-<rect x="148.7542859665328" y="1356.9849322904008" width="127.53727625670979" height="468.70079574430747" class="image-mapper-shape" data-index="13"></rect>
-</g>
-</a>
-<a xlink:href="#" target="---" xlink:title="">
-<g>
-<rect x="828.7594015991425" y="1828.1011553159633" width="123.08025518000068" height="417.68300539321945" class="image-mapper-shape" data-index="14"></rect>
-</g>
-</a>
-<a xlink:href="#" target="---" xlink:title="">
-<g>
-<rect x="444.62708577949377" y="-682.3454481327096" width="143.24293051701784" height="403.9282661574291" class="image-mapper-shape" data-index="15"></rect>
-</g>
-</a>
-<a xlink:href="#" target="---" xlink:title="">
-<g>
-<rect x="680.3491481555021" y="1829.298661898959" width="148.76449302416552" height="416.2547464001673" class="image-mapper-shape selected" data-index="16"></rect>
-</g>
-</a>
+<--wed5-->
+<g transform="translate(0,1828)
+<rect x="828.7594015991425" y="0" width="123.08025518000068" height="417.68300539321945" class="m" data-href="1"/>
+
+<rect x="680.3491481555021" y="0" width="148.76449302416552" height="416.2547464001673" class="m" data-href="1"/>
+
 </svg>
 </g>
 
