@@ -9,7 +9,7 @@ import { initPDFViewer } from './javascript/ui/pdf-viewer.js';
 import { initializeGroup, loadSelectedGroup } from './javascript/core/group-loader.js';
 import { scan } from './javascript/features/svg-processor.js';
 import { resetBrowserZoom } from './javascript/core/utils.js';
-import { checkForUpdates } from './javascript/features/update-checker.js';
+import { checkForUpdates } from './javascript/core/update-checker.js';
 
 const updateBtn = document.getElementById('check-update-btn');
 if (updateBtn) {
