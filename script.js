@@ -9,6 +9,12 @@ import { initPDFViewer } from './javascript/ui/pdf-viewer.js';
 import { initializeGroup, loadSelectedGroup } from './javascript/core/group-loader.js';
 import { scan } from './javascript/features/svg-processor.js';
 import { resetBrowserZoom } from './javascript/core/utils.js';
+import { checkForUpdates } from './javascript/update-checker.js';
+
+const updateBtn = document.getElementById('check-update-btn');
+if (updateBtn) {
+    updateBtn.addEventListener('click', () => {
+        checkForUpdates();
 
 // ---------- تحميل آخر جروب تلقائياً ----------
 function autoLoadLastGroup() {
