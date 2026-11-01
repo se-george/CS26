@@ -15,6 +15,8 @@ const updateBtn = document.getElementById('check-update-btn');
 if (updateBtn) {
     updateBtn.addEventListener('click', () => {
         checkForUpdates();
+    }); // ⬅️ قفلنا القوس هنا صح!
+}
 
 // ---------- تحميل آخر جروب تلقائياً ----------
 function autoLoadLastGroup() {
@@ -38,6 +40,7 @@ function autoLoadLastGroup() {
         console.log('📋 لا يوجد جروب محفوظ - عرض شاشة الاختيار');
     }
 }
+
 
 // ---------- مراقب تغيير Z-Index (إعادة تعيين التكبير) ----------
 function observeZIndexChanges() {
