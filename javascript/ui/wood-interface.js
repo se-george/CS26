@@ -24,6 +24,13 @@ import { setupSearchInput, setupEyeToggleSystem } from './search-and-eye.js';
 // ---------- متغير التفاعل ----------
 export let interactionEnabled = true;
 
+// ---------- الامتدادات المسموح بعرضها (تمت إضافة الصور، الفيديوهات، وpptx) ----------
+const ALLOWED_EXTENSIONS = ['pdf', 'png', 'jpg', 'jpeg', 'gif', 'mp4', 'webm', 'pptx', 'ppt'];
+const isSupportedFile = (path) => {
+    const ext = path.split('.').pop().toLowerCase();
+    return ALLOWED_EXTENSIONS.includes(ext);
+};
+
 // ---------- تحديث واجهة الخشب ----------
 export async function updateWoodInterface() {
     const dynamicGroup = document.getElementById('dynamic-links-group');
@@ -54,11 +61,11 @@ export async function updateWoodInterface() {
         const folderName = currentFolder.split('/').pop();
         const countInCurrent = globalFileTree.filter(f => {
             const isInside = f.path.startsWith(currentFolder + '/');
-            const isPdf = f.path.toLowerCase().endsWith('.pdf');
-            if (query === "") return isInside && isPdf;
+            const isValidFile = isSupportedFile(f.path);
+            if (query === "") return isInside && isValidFile;
             const fileName = f.path.split('/').pop().toLowerCase();
             const arabicName = autoTranslate(fileName);
-            return isInside && isPdf && (
+            return isInside && isValidFile && (
                 normalizeArabic(fileName).includes(query) ||
                 normalizeArabic(arabicName).includes(query)
             );
@@ -89,7 +96,7 @@ export async function updateWoodInterface() {
 
             if (!itemsMap.has(name)) {
                 const isDir = pathParts.length > 1 || item.type === 'tree';
-                const isPdf = item.path.toLowerCase().endsWith('.pdf');
+                const isValidFile = isSupportedFile(item.path);
 
                 const lowerName = name.toLowerCase();
                 let isSubjectItem = false;
@@ -113,7 +120,7 @@ export async function updateWoodInterface() {
                         isSubject: isSubjectItem,
                         subject: mainSubject
                     });
-                } else if (isPdf && pathParts.length === 1) {
+                } else if (isValidFile && pathParts.length === 1) {
                     itemsMap.set(name, {
                         name: name,
                         type: 'file',
@@ -279,13 +286,13 @@ export async function updateWoodInterface() {
             if (item.type === 'dir') {
                 const filteredCount = globalFileTree.filter(f => {
                     const isInsideFolder = f.path.startsWith(item.path + '/');
-                    const isPdf = f.path.toLowerCase().endsWith('.pdf');
-                    if (query === "") return isInsideFolder && isPdf;
+                    const isValidFile = isSupportedFile(f.path);
+                    if (query === "") return isInsideFolder && isValidFile;
 
                     const fileName = f.path.split('/').pop().toLowerCase();
                     const fileArabic = autoTranslate(fileName);
 
-                    return isInsideFolder && isPdf && (
+                    return isInsideFolder && isValidFile && (
                         normalizeArabic(fileName).includes(query) ||
                         normalizeArabic(fileArabic).includes(query)
                     );
@@ -300,8 +307,15 @@ export async function updateWoodInterface() {
                     shouldDisplay = false;
                 }
             } else {
+                // تحديد أيقونة مناسبة حسب نوع الملف
+                let icon = "📄 ";
+                const ext = item.path.split('.').pop().toLowerCase();
+                if (['png', 'jpg', 'jpeg', 'gif'].includes(ext)) icon = "🖼️ ";
+                else if (['mp4', 'webm'].includes(ext)) icon = "🎬 ";
+                else if (['pptx', 'ppt'].includes(ext)) icon = "📊 ";
+
                 const displayName = cleanName.length > 25 ? cleanName.substring(0, 22) + "..." : cleanName;
-                t.textContent = "📄 " + displayName;
+                t.textContent = icon + displayName;
 
                 const arabicName = autoTranslate(cleanName);
                 if (query !== "" &&
