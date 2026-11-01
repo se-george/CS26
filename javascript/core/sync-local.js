@@ -2,7 +2,7 @@ import { Filesystem, Directory } from '@capacitor/filesystem';
 import { FileOpener } from '@capacitor-community/file-opener';
 
 // دالة لتحميل الملف في مسار الجهاز ومزامنته وفتحه
-async function syncAndOpenFile(fileUrl, fileName) {
+export async function syncAndOpenFile(fileUrl, fileName) {
     try {
         // 1. تحميل الملف من جيت هاب أو المصدر
         const response = await fetch(fileUrl);
