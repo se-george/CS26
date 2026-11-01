@@ -1085,7 +1085,7 @@ html, body {
 .legend-item.purple { --item-color: var(--color-a); }
 .legend-item.green  { --item-color: var(--color-s); }
 .legend-item.yellow { --item-color: var(--color-l); }
-.legend-item.is     { --item-color: var(--color-is); }
+.legend-item.gray   { --item-color: var(--color-is); }
 
 /* [007] شريط الأدوات */
 #js-toggle-container {
