@@ -1,5 +1,3 @@
-يا غالي، عشان الـ AI بيعرض الـ SVG كصورة أو بيكتمه لو مش محطوط جوة صندوق كود (Code Block) صريح أو لو المتصفح/الواجهة حاولت ترسمه ومظهرش بالشكل المطلوب.
-عشان تضمن إنه يظهر وتاخده كوبي مظبوط من غير أي مشاكل، حطيت لك الكود جوه بلوك كود منفصل تماماً:
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g transform="translate(1024,0)"><image data-src="image/F/01.webp" width="1024" height="2454"/><text x="512" y="2300" class="m">1</text></g>
 <g transform="translate(2048,0)"><image data-src="image/F/01.webp" width="1024" height="2454"/><text x="512" y="2300" class="m">2</text></g>
 <g transform="translate(3072,0)"><image data-src="image/F/01.webp" width="1024" height="2454"/><text x="512" y="2300" class="m">3</text></g>
