@@ -1575,3 +1575,14 @@ img, image, svg, rect {
   font-size: 13px;
   padding: 20px 0;
 }
+/* تعطيل تأثيرات الـ Hover تماماً عند إيقاف السويتش */
+body.disable-hover .m:hover {
+    filter: none !important;
+    stroke-width: 2px !important;
+    transform: none !important;
+}
+
+body.disable-hover .group-btn:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
