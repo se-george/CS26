@@ -132,6 +132,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 return false;
             }
         });
+// ---------- التحكم في سويتش الـ Hover ----------
+const hoverSwitch = document.getElementById('js-toggle');
+if (hoverSwitch) {
+    // استرجاع الحالة المحفوظة مسبقاً إن وجدت
+    const savedHoverState = localStorage.getItem('disable_hover');
+    if (savedHoverState === 'true') {
+        hoverSwitch.checked = false;
+        document.body.classList.add('disable-hover');
+    }
+
+    hoverSwitch.addEventListener('change', (e) => {
+        if (e.target.checked) {
+            document.body.classList.remove('disable-hover');
+            localStorage.setItem('disable_hover', 'false');
+            console.log('✨ تم تفعيل الـ Hover');
+        } else {
+            document.body.classList.add('disable-hover');
+            localStorage.setItem('disable_hover', 'true');
+            console.log('🚫 تم إيقاف الـ Hover');
+        }
+    });
+}
+
     }
 
     console.log('✅ script.js تم تحميله بالكامل - جميع الوحدات جاهزة');
