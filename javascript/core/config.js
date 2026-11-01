@@ -17,7 +17,10 @@ export const PROTECTED_FILES = [
     'image/logo-A.webp',
     'image/logo-B.webp',
     'image/logo-C.webp',
-    'image/logo-D.webp'
+    'image/logo-D.webp',
+    'image/logo-E.webp',
+    'image/logo-F.webp',
+    'image/black.webp'
 ];
 
 export function isProtectedFile(filename) {
