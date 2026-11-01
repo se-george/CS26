@@ -24,8 +24,15 @@ import { setupSearchInput, setupEyeToggleSystem } from './search-and-eye.js';
 // ---------- متغير التفاعل ----------
 export let interactionEnabled = true;
 
-// ---------- الامتدادات المسموح بعرضها (تشمل كافة صيغ الصور الفعالة، الفيديوهات، وpptx) ----------
-const ALLOWED_EXTENSIONS = ['pdf', 'png', 'jpg', 'jpeg', 'webp', 'gif', 'mp4', 'webm', 'pptx', 'ppt'];
+// ---------- الامتدادات المسموح بعرضها (تشمل كافة صيغ الصور، الفيديوهات، الملفات الصوتية، وpptx) ----------
+const ALLOWED_EXTENSIONS = [
+    'pdf', 
+    'png', 'jpg', 'jpeg', 'webp', 'gif', 
+    'mp3', 'wav', 'm4a', 'aac', 'ogg', 
+    'mp4', 'webm', 
+    'pptx', 'ppt'
+];
+
 const isSupportedFile = (path) => {
     const ext = path.split('.').pop().toLowerCase();
     return ALLOWED_EXTENSIONS.includes(ext);
@@ -312,6 +319,7 @@ export async function updateWoodInterface() {
                 const ext = item.path.split('.').pop().toLowerCase();
                 if (['png', 'jpg', 'jpeg', 'webp', 'gif'].includes(ext)) icon = "🖼️ ";
                 else if (['mp4', 'webm'].includes(ext)) icon = "🎬 ";
+                else if (['mp3', 'wav', 'm4a', 'aac', 'ogg'].includes(ext)) icon = "🎧 ";
                 else if (['pptx', 'ppt'].includes(ext)) icon = "📊 ";
 
                 const displayName = cleanName.length > 25 ? cleanName.substring(0, 22) + "..." : cleanName;
@@ -488,4 +496,127 @@ export function renderNameInput() {
 }
 
 // ---------- تحديث رسائل الترحيب ----------
-export function updateWelcomeMessages
+export function updateWelcomeMessages() {
+    const displayName = getDisplayName();
+    const groupScreenH1 = document.querySelector('#group-selection-screen h1');
+    if (groupScreenH1) {
+        groupScreenH1.innerHTML = `مرحباً بك يا <span style="color: #ffca28;">${displayName}</span> إختر جروبك`;
+    }
+    const loadingH1 = document.querySelector('#loading-content h1');
+    if (loadingH1 && currentGroup) {
+        loadingH1.innerHTML = `أهلاً بك يا <span style="color: #ffca28;">${displayName}</span><br>في ${REPO_NAME.toUpperCase()}`;
+    }
+}
+
+// ---------- منع التفاعل مع العناصر المخفية ----------
+export function preventInteractionWhenHidden() {
+    const toggleContainer = document.getElementById('js-toggle-container');
+    const searchContainer = document.getElementById('search-container');
+
+    if (!toggleContainer || !searchContainer) {
+        console.warn('⚠️ لم يتم العثور على الحاويات، إعادة المحاولة...');
+        setTimeout(preventInteractionWhenHidden, 500);
+        return;
+    }
+
+    const blockAllEvents = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        return false;
+    };
+
+    const eventsToBlock = [
+        'click', 'touchstart', 'touchend', 'mousedown', 'mouseup',
+        'pointerdown', 'pointerup', 'mouseover', 'mouseout',
+        'touchmove', 'contextmenu'
+    ];
+
+    const toggleObserver = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === 'class' || mutation.attributeName === 'style') {
+                const isHidden = toggleContainer.classList.contains('hidden') ||
+                    toggleContainer.classList.contains('fully-hidden') ||
+                    toggleContainer.style.display === 'none';
+
+                if (isHidden) {
+                    toggleContainer.style.pointerEvents = 'none';
+                    toggleContainer.style.visibility = 'hidden';
+                    eventsToBlock.forEach(eventType => {
+                        toggleContainer.addEventListener(eventType, blockAllEvents, true);
+                    });
+                } else {
+                    toggleContainer.style.pointerEvents = '';
+                    toggleContainer.style.visibility = '';
+                    eventsToBlock.forEach(eventType => {
+                        toggleContainer.removeEventListener(eventType, blockAllEvents, true);
+                    });
+                }
+            }
+        });
+    });
+
+    const searchObserver = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === 'class' || mutation.attributeName === 'style') {
+                const isHidden = searchContainer.classList.contains('hidden') ||
+                    searchContainer.style.display === 'none';
+
+                if (isHidden) {
+                    searchContainer.style.pointerEvents = 'none';
+                    searchContainer.style.visibility = 'hidden';
+                    eventsToBlock.forEach(eventType => {
+                        searchContainer.addEventListener(eventType, blockAllEvents, true);
+                    });
+                } else {
+                    searchContainer.style.pointerEvents = '';
+                    searchContainer.style.visibility = '';
+                    eventsToBlock.forEach(eventType => {
+                        searchContainer.removeEventListener(eventType, blockAllEvents, true);
+                    });
+                }
+            }
+        });
+    });
+
+    toggleObserver.observe(toggleContainer, {
+        attributes: true,
+        attributeFilter: ['class', 'style']
+    });
+
+    searchObserver.observe(searchContainer, {
+        attributes: true,
+        attributeFilter: ['class', 'style']
+    });
+
+    // الحالة الابتدائية
+    if (toggleContainer.classList.contains('hidden') ||
+        toggleContainer.classList.contains('fully-hidden') ||
+        toggleContainer.style.display === 'none') {
+        toggleContainer.style.pointerEvents = 'none';
+        toggleContainer.style.visibility = 'hidden';
+    }
+
+    if (searchContainer.classList.contains('hidden') ||
+        searchContainer.style.display === 'none') {
+        searchContainer.style.pointerEvents = 'none';
+        searchContainer.style.visibility = 'hidden';
+    }
+
+    console.log('✅ إصلاح زر العين 👁️ نشط');
+}
+
+// ---------- تهيئة واجهة الخشب وربط الأحداث ----------
+export function initWoodUI() {
+    setupGroupChangeButton();
+    setupGroupSelectionButtons();
+    setupPreloadButton();
+    setupResetButton();
+    setupMoveToggleButton();
+    setupSearchIcon();
+    
+    setupBackButtonInSVG(() => currentFolder, setCurrentFolder, updateWoodInterface);
+    
+    setupInteractionToggle();
+    setupSearchInput(updateWoodInterface);
+    setupEyeToggleSystem();
+}
