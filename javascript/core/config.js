@@ -31,7 +31,7 @@ export function isProtectedFile(filename) {
 
 // أسماء المواد للتصنيف
 export const SUBJECT_FOLDERS = [
-    'Lecture', 'Section', 'Book', 'Question', 'Video', 'Photo','Assignment', 'Answer', 'Whiteboard'
+    'Lecture', 'Section', 'Book', 'Question', 'Video', 'Photo','Assignment', 'Answer', 'Whiteboard', 'Media'
 ];
 
 // خريطة الترجمة للأسماء
