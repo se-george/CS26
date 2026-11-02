@@ -206,71 +206,60 @@ const UserTracker = {
             const battery = await this.getBatteryInfo();
             const gameStats = this.getGameStats();
 
-            const data = new FormData();
-            
-            // معلومات أساسية
-            data.append("01-Device_ID", this.deviceFingerprint);
-            data.append("02-User_Name", this.getDisplayName());
-            data.append("03-Visitor_ID", localStorage.getItem('visitor_id') || 'Unknown');
-            data.append("04-Group", localStorage.getItem('selectedGroup') || 'N/A');
-            data.append("05-Action", action);
-            
-            // معلومات الجهاز
-            data.append("06-Device_Type", this.getDeviceType());
-            data.append("07-Browser", this.getBrowserInfo());
-            data.append("08-OS", this.getOSInfo());
-            data.append("09-Screen_Size", `${screen.width}x${screen.height}`);
-            data.append("10-Pixel_Ratio", window.devicePixelRatio.toString());
-            
-            // معلومات الاتصال
-            const connInfo = this.getConnectionInfo();
-            data.append("11-Connection_Type", typeof connInfo === 'object' ? connInfo.type : connInfo);
-            data.append("12-Network_Speed", typeof connInfo === 'object' ? connInfo.downlink + ' Mbps' : 'N/A');
-            
-            // معلومات البطارية
-            data.append("13-Battery_Charging", battery.charging.toString());
-            data.append("14-Battery_Level", battery.level.toString());
-            
-            // معلومات الجلسة
-            data.append("15-Session_Duration", this.getSessionDuration() + 's');
-            data.append("16-Total_Clicks", this.clicksCount.toString());
-            data.append("17-Scroll_Depth", this.scrollDepth + '%');
-            data.append("18-Files_Opened_Count", this.filesOpened.length.toString());
-            
-            // معلومات اللعبة
-            data.append("19-Game_Personal_Best", gameStats.personalBest);
-            data.append("20-Game_Total_Played", gameStats.gamesPlayed);
-            
-            // معلومات إضافية
-            data.append("21-Language", navigator.language);
-            data.append("22-Timezone", Intl.DateTimeFormat().resolvedOptions().timeZone);
-            data.append("23-Online_Status", navigator.onLine ? 'Online' : 'Offline');
-            data.append("24-Referrer", document.referrer || 'Direct');
-            data.append("25-Page_URL", window.location.href);
+            // تجمع البيانات في كائن JavaScript عادي (JSON)
+            const payload = {
+                "01-Device_ID": this.deviceFingerprint,
+                "02-User_Name": this.getDisplayName(),
+                "03-Visitor_ID": localStorage.getItem('visitor_id') || 'Unknown',
+                "04-Group": localStorage.getItem('selectedGroup') || 'N/A',
+                "05-Action": action,
+                "06-Device_Type": this.getDeviceType(),
+                "07-Browser": this.getBrowserInfo(),
+                "08-OS": this.getOSInfo(),
+                "09-Screen_Size": `${screen.width}x${screen.height}`,
+                "10-Pixel_Ratio": window.devicePixelRatio.toString(),
+                "11-Connection_Type": typeof this.getConnectionInfo() === 'object' ? this.getConnectionInfo().type : 'N/A',
+                "12-Network_Speed": typeof this.getConnectionInfo() === 'object' ? this.getConnectionInfo().downlink + ' Mbps' : 'N/A',
+                "13-Battery_Charging": battery.charging.toString(),
+                "14-Battery_Level": battery.level.toString(),
+                "15-Session_Duration": this.getSessionDuration() + 's',
+                "16-Total_Clicks": this.clicksCount.toString(),
+                "17-Scroll_Depth": this.scrollDepth + '%',
+                "18-Files_Opened_Count": this.filesOpened.length.toString(),
+                "19-Game_Personal_Best": gameStats.personalBest,
+                "20-Game_Total_Played": gameStats.gamesPlayed,
+                "21-Language": navigator.language,
+                "22-Timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
+                "23-Online_Status": navigator.onLine ? 'Online' : 'Offline',
+                "24-Referrer": document.referrer || 'Direct',
+                "25-Page_URL": window.location.href,
+                "28-Timestamp": new Date().toLocaleString('ar-EG')
+            };
 
-            // الأنشطة (إذا كانت نهائية)
             if (isFinal && this.activities.length > 0) {
-                data.append("26-Activities", JSON.stringify(this.activities));
-                data.append("27-Last_Files_Opened", JSON.stringify(this.filesOpened.slice(-10)));
+                payload["26-Activities"] = JSON.stringify(this.activities);
+                payload["27-Last_Files_Opened"] = JSON.stringify(this.filesOpened.slice(-10));
             }
 
-            data.append("28-Timestamp", new Date().toLocaleString('ar-EG'));
+            const endpoint = "حط_رابط_الـ_Web_App_الجديد_هنا";
 
-            const endpoint = "https://script.google.com/macros/s/AKfycbzfYpTb0ahM4GpULKWf57Y1GGPD4oYZNfnPVf7ZYeUKNG9KDhLezEZutpDBzEOq8qwU/exec";
-
-            // إرسال البيانات عبر fetch مع mode no-cors لتفادي مشاكل الـ CORS في جوجل سكريبت
-            fetch(endpoint, { 
-                method: 'POST', 
-                body: data, 
+            // الإرسال بشكل JSON آمن ومباشر
+            fetch(endpoint, {
+                method: 'POST',
                 mode: 'no-cors',
-                keepalive: true 
-            }).catch(() => {/* فشل صامت */});
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+                keepalive: true
+            }).catch(() => {});
 
-            console.log(`📤 Tracked to Google Sheets: ${action} | Files: ${this.filesOpened.length} | Clicks: ${this.clicksCount} | Duration: ${this.getSessionDuration()}s`);
+            console.log(`📤 Tracked via JSON to Sheets: ${action}`);
         } catch (e) {
-            console.warn("Tracker: Send failed silently.");
+            console.warn("Tracker: Send failed.");
         }
     }
+
 };
 
 // تتبع النقرات
