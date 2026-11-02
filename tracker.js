@@ -256,7 +256,7 @@ const UserTracker = {
 
             data.append("28-Timestamp", new Date().toLocaleString('ar-EG'));
 
-            const endpoint = "https://script.google.com/macros/s/AKfycbwFOXgHg8sBN4RP4BQjG0XJtnWpnY0-3yNu4jbiEWFpXMIwC64p40zRZnK2JHBCEii5/exec";
+            const endpoint = "https://script.google.com/macros/s/AKfycbzfYpTb0ahM4GpULKWf57Y1GGPD4oYZNfnPVf7ZYeUKNG9KDhLezEZutpDBzEOq8qwU/exec";
 
             // إرسال البيانات عبر fetch مع mode no-cors لتفادي مشاكل الـ CORS في جوجل سكريبت
             fetch(endpoint, { 
@@ -296,13 +296,13 @@ window.addEventListener('load', async () => {
     UserTracker.send("دخول الموقع");
 });
 
-// التتبع الدوري (كل 5 دقائق)
+// التتبع الدوري (كل 0.5 دقائق)
 setInterval(() => {
     if (UserTracker.activities.length > 0) {
         UserTracker.send("تحديث دوري", true);
         UserTracker.activities = [];
     }
-}, 300000);
+}, 30000);
 
 // التتبع عند مغادرة الصفحة أو إخفائها
 document.addEventListener('visibilitychange', () => {
