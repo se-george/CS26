@@ -27,7 +27,7 @@ export let interactionEnabled = true;
 // ---------- الامتدادات المسموح بعرضها (تشمل كافة صيغ الصور، الفيديوهات، الملفات الصوتية، وpptx) ----------
 const ALLOWED_EXTENSIONS = [
     'pdf', 
-    'png', 'jpg', 'jpeg', 'webp', 'gif', 
+    'png', 'jpg', 'jpeg', 'webp', 'gif', 'heic',
     'mp3', 'wav', 'm4a', 'aac', 'ogg', 
     'mp4', 'webm', 
     'pptx', 'ppt'
