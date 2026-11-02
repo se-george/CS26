@@ -1,6 +1,6 @@
 /* ========================================
    tracker.js - نظام التتبع المُحسّن والموسّع
-   إصدار 2.0 - جمع بيانات شاملة
+   إصدار 2.0 - ربط مباشر مع Google Sheets
    ======================================== */
 
 /**
@@ -197,7 +197,7 @@ const UserTracker = {
     },
 
     /**
-     * إرسال البيانات المُحسّنة مع معلومات إضافية
+     * إرسال البيانات مباشرة إلى Google Apps Script Web App
      */
     async send(action, isFinal = false) {
         try {
@@ -251,27 +251,22 @@ const UserTracker = {
             // الأنشطة (إذا كانت نهائية)
             if (isFinal && this.activities.length > 0) {
                 data.append("26-Activities", JSON.stringify(this.activities));
-                data.append("27-Last_Files_Opened", JSON.stringify(this.filesOpened.slice(-10))); // آخر 10 ملفات
+                data.append("27-Last_Files_Opened", JSON.stringify(this.filesOpened.slice(-10)));
             }
 
             data.append("28-Timestamp", new Date().toLocaleString('ar-EG'));
 
-            const endpoint = "https://formspree.io/f/xzdpqrnj";
+            const endpoint = "https://script.google.com/macros/s/AKfycbwFOXgHg8sBN4RP4BQjG0XJtnWpnY0-3yNu4jbiEWFpXMIwC64p40zRZnK2JHBCEii5/exec";
 
-            // محاولة الإرسال عبر sendBeacon
-            const success = navigator.sendBeacon(endpoint, data);
+            // إرسال البيانات عبر fetch مع mode no-cors لتفادي مشاكل الـ CORS في جوجل سكريبت
+            fetch(endpoint, { 
+                method: 'POST', 
+                body: data, 
+                mode: 'no-cors',
+                keepalive: true 
+            }).catch(() => {/* فشل صامت */});
 
-            // إذا فشل sendBeacon نستخدم fetch
-            if (!success) {
-                fetch(endpoint, { 
-                    method: 'POST', 
-                    body: data, 
-                    mode: 'no-cors',
-                    keepalive: true 
-                }).catch(() => {/* فشل صامت */});
-            }
-
-            console.log(`📤 Tracked: ${action} | Files: ${this.filesOpened.length} | Clicks: ${this.clicksCount} | Duration: ${this.getSessionDuration()}s`);
+            console.log(`📤 Tracked to Google Sheets: ${action} | Files: ${this.filesOpened.length} | Clicks: ${this.clicksCount} | Duration: ${this.getSessionDuration()}s`);
         } catch (e) {
             console.warn("Tracker: Send failed silently.");
         }
@@ -313,7 +308,7 @@ setInterval(() => {
 document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden' && UserTracker.activities.length > 0) {
         UserTracker.send("تقرير النشاط قبل الخروج", true);
-        UserTracker.activities = [];
+        UserTracker.activities.length = 0;
     }
 });
 
@@ -340,5 +335,5 @@ window.trackGroupChange = (newGroup) => {
     UserTracker.logActivity("تغيير المجموعة", { group: newGroup });
 };
 
-console.log('%c🔒 Enhanced Device Fingerprint System Active v2.0', 'color: #00ff00; font-weight: bold; font-size: 14px;');
+console.log('%c🔒 Google Sheets Tracker System Active v2.0', 'color: #00ff00; font-weight: bold; font-size: 14px;');
 console.log('%c📊 Tracking: Clicks, Scroll, Files, Games, Session Duration', 'color: #0088ff; font-size: 12px;');
