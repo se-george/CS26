@@ -241,7 +241,7 @@ const UserTracker = {
                 payload["27-Last_Files_Opened"] = JSON.stringify(this.filesOpened.slice(-10));
             }
 
-            const endpoint = "حط_رابط_الـ_Web_App_الجديد_هنا";
+            const endpoint = "https://script.google.com/macros/s/AKfycbwdegeI49jemPrWHh8uxFtKqbIt8BgPJnkWuXSskP5NZhHgTH-s33PhfARYDr638kZ8/exec";
 
             // الإرسال بشكل JSON آمن ومباشر
             fetch(endpoint, {
