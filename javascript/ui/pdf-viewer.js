@@ -265,7 +265,7 @@ export async function openWithMozilla(item) {
     const url = `${RAW_CONTENT_BASE}${item.path}`;
     const scrollContainer = document.getElementById('scroll-container');
     const scrollPosition = scrollContainer ? scrollContainer.scrollLeft : 0;
-    pushNavigationState(NAV_STATE.PDF_VIEW, {[span_5](start_span)[span_5](end_span)
+    pushNavigationState(NAV_STATE.PDF_VIEW, {
         path: item.path,
         scrollPosition: scrollPosition,
         viewer: 'mozilla'
