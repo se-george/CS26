@@ -591,7 +591,8 @@ html, body {
 .s { stroke: var(--color-s); }
 .l { stroke: var(--color-l); }
 .is { stroke: var(--color-is); }
-.x { fill: rgba(255, 255, 255, 0.7);}
+.x { fill: #ffffffb3; }
+.o { fill: #ffffff00; }
 
 /* ==========================================================================
    [003] شاشة اختيار المجموعة (Group Selection Screen)
@@ -1087,9 +1088,6 @@ html, body {
 .legend-item.green  { --item-color: var(--color-s); }
 .legend-item.yellow { --item-color: var(--color-l); }
 .legend-item.gray   { --item-color: var(--color-is); }
-.x {
-  fill: rgba(255, 255, 255, 0.7);
-}
 
 /* [007] شريط الأدوات */
 #js-toggle-container {
