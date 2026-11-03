@@ -25,7 +25,7 @@
 </g></g><g transform="translate(7168,0)"><image data-src="image/F/01.webp" width="1024" height="2454"/><text x="512" y="2300" class="m">7</text>
 !--Sat5--><g transform="translate(0,277)">
 <rect x="827.2" y="0" width="125.66" height="414.5" class=""/>
-<rect x="679.788" y="0" width="145.68843216451342" height="414.55344861543693" class=""/>
+<rect x="679.788" y="0" width="145.68843216451342" height="414.55344861543693" class="x"/>
 <rect x="534.5465245337214" y="0" width="145.16495592305796" height="415.49322699320345" class="x"/>
 </g><!--Sun5--><g transform="translate(0,695)">
 <rect x="408.0341006574585" y="2" width="125.93882369107479" height="585.6897158785835" class="x"/>
