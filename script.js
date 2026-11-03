@@ -10,6 +10,24 @@ import { initializeGroup, loadSelectedGroup } from './javascript/core/group-load
 import { scan } from './javascript/features/svg-processor.js';
 import { resetBrowserZoom } from './javascript/core/utils.js';
 import { checkForUpdates } from './javascript/core/update-checker.js';
+import { smartOpen } from './javascript/ui/pdf-viewer.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+    // الاستماع للضغط على مستطيلات الـ SVG
+    const svgContainer = document.getElementById('main-svg');
+    if (svgContainer) {
+        svgContainer.addEventListener('click', (e) => {
+            const target = e.target;
+            // التحقق من أن العنصر المضغوط مستطيل ويحتوي على مسار ملف
+            if (target.tagName === 'rect' && (target.getAttribute('data-hrsf') || target.getAttribute('data-path'))) {
+                const pdfPath = target.getAttribute('data-hrsf') || target.getAttribute('data-path');
+                if (pdfPath) {
+                    smartOpen({ path: pdfPath });
+                }
+            }
+        });
+    }
+});
 
 const updateBtn = document.getElementById('check-update-btn');
 if (updateBtn) {
