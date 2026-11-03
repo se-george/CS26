@@ -577,7 +577,7 @@ html, body {
 /* [002] المستطيلات التفاعلية */
 .m {
   fill: transparent !important;
-  stroke-width: 2px;
+  stroke-width: 6px;
   transform-origin: center center;
   transition: filter 0.2s ease, stroke-width 0.2s ease;
   cursor: pointer;
