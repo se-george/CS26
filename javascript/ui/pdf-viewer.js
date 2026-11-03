@@ -256,54 +256,73 @@ export function closeOpenOptions() {
 // ---------- طرق الفتح (مُصححة ومُحسنة) ----------
 
 // 1. الفتح العارض الداخلي المدمج
-export function openWithMozilla(item) {
+export async function openWithMozilla(item) {
     if (!item) {
         console.error('❌ openWithMozilla: item is null');
         return;
     }
 
-    const url = `${RAW_CONTENT_BASE}${item.path}`;
+    const url = `${RAW_CONTENT_BASE}${item.path}`;[span_3](start_span)[span_3](end_span)
     const scrollContainer = document.getElementById('scroll-container');
-    const scrollPosition = scrollContainer ? scrollContainer.scrollLeft : 0;
+    const scrollPosition = scrollContainer ? scrollContainer.scrollLeft : 0;[span_4](start_span)[span_4](end_span)
 
-    pushNavigationState(NAV_STATE.PDF_VIEW, {
+    pushNavigationState(NAV_STATE.PDF_VIEW, {[span_5](start_span)[span_5](end_span)
         path: item.path,
         scrollPosition: scrollPosition,
         viewer: 'mozilla'
     });
 
-    const overlay = document.getElementById("pdf-overlay");
-    const pdfViewer = document.getElementById("pdfFrame");
-    const toolbar = document.getElementById('toolbar');
-    const eyeBtn = document.getElementById('pdf-eye-draggable');
+    const overlay = document.getElementById("pdf-overlay");[span_6](start_span)[span_6](end_span)
+    const pdfViewer = document.getElementById("pdfFrame");[span_7](start_span)[span_7](end_span)
+    const toolbar = document.getElementById('toolbar');[span_8](start_span)[span_8](end_span)
+    const eyeBtn = document.getElementById('pdf-eye-draggable');[span_9](start_span)[span_9](end_span)
 
     if (!overlay || !pdfViewer) {
         console.error('❌ عناصر عارض PDF غير موجودة');
         return;
     }
 
-    overlay.classList.remove("hidden");
-    overlay.style.display = 'flex';
+    overlay.classList.remove("hidden");[span_10](start_span)[span_10](end_span)
+    overlay.style.display = 'flex';[span_11](start_span)[span_11](end_span)
 
     if (toolbar && eyeBtn) {
         toolbar.style.display = 'flex';
         eyeBtn.classList.remove('active');
         eyeBtn.title = 'إخفاء شريط الأدوات';
-        isPdfToolbarHidden = false;
+        isPdfToolbarHidden = false;[span_12](start_span)[span_12](end_span)
     }
 
-    resetBrowserZoom();
+    resetBrowserZoom();[span_13](start_span)[span_13](end_span)
 
-    // 💡 استخدام قارئ PDF.js الخارجي مع إرسال الرابط المباشر
-    // دون استخدام fetch/blob لتفادي مشكلة CORS والشاشة البيضاء
-    pdfViewer.src = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(url)}#zoom=page-fit`;
+    try {
+        // 1. جلب الملف كـ Blob لتجاوز قيود CORS بالكامل
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('فشل تحميل الملف من السيرفر');
+        const blob = await response.blob();
+
+        // 2. مسح الـ Blob القديم إن وجد لمنع تسريب الذاكرة (Memory Leak)
+        if (currentBlobUrl) {
+            URL.revokeObjectURL(currentBlobUrl);
+        }
+
+        // 3. إنشاء Blob URL محلي مؤقت
+        currentBlobUrl = URL.createObjectURL(blob);
+
+        // 4. تمرير الـ Blob URL المحلي لعارض موزيلا داخل الـ iframe
+        pdfViewer.src = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(currentBlobUrl)}#zoom=page-fit`;
+
+    } catch (error) {
+        console.error('❌ خطأ أثناء إنشاء الـ Blob URL، العودة للرابط المباشر:', error);
+        // كخيار احتياطي إذا فشل الـ fetch لأي سبب
+        pdfViewer.src = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(url)}#zoom=page-fit`;
+    }
 
     if (typeof trackSvgOpen === 'function') {
-        trackSvgOpen(item.path);
+        trackSvgOpen(item.path);[span_14](start_span)[span_14](end_span)
     }
 
-    closeOpenOptions();
-    console.log('📄 تم فتح المستند داخل Mozilla Viewer:', url);
+    closeOpenOptions();[span_15](start_span)[span_15](end_span)
+    console.log('📄 تم فتح المستند داخل Mozilla Viewer باستخدام Blob URL المحلي');
 }
 
 // 2. الفتح عبر Google Drive
