@@ -440,5 +440,40 @@ document.addEventListener('visibilitychange', () => {
   if (!document.hidden) checkForUpdates();
 });
 </script>
+<!-- PWA Install Prompt Listener -->
+<script>
+(function () {
+  window._pwaPrompt = null;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    window._pwaPrompt = e;
+    window.dispatchEvent(new Event('pwaInstallReady'));
+  });
+  window.addEventListener('appinstalled', () => {
+    window._pwaPrompt = null;
+    console.log('✅ التطبيق مثبت بالفعل');
+  });
+})();
+</script>
+
+<!-- iOS Install Banner Logic -->
+<script>
+(function () {
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isStandalone = window.navigator.standalone === true;
+  const dismissed = localStorage.getItem('ios_banner_dismissed');
+  if (isIOS && !isStandalone && !dismissed) {
+    const banner = document.getElementById('ios-install-banner');
+    setTimeout(() => { if (banner) banner.classList.add('show'); }, 2500);
+    const closeBtn = document.getElementById('ios-banner-close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        banner.classList.remove('show');
+        localStorage.setItem('ios_banner_dismissed', '1');
+      });
+    }
+  }
+})();
+</script>
 </body>
 </html>
