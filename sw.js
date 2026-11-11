@@ -1,5 +1,5 @@
 /* ========================================
-   sw.js - Service Worker
+   sw.js - Service Worker (المحسن والآمن)
    ======================================== */
 const CACHE_NAME = 'semester-1-cache-v62';
 const urlsToCache = [
@@ -81,15 +81,16 @@ self.addEventListener('fetch', event => {
     // لا نتعامل مع طلبات الـ SW نفسه
     if (url.pathname.includes('sw.js')) return;
 
-    // ✅ استراتيجية Cache First مع Fallback
+    // ✅ استراتيجية Cache First مع الاستجابة والنسخ الآمن
     event.respondWith(
         caches.match(event.request).then(cached => {
             if (cached) {
-                // محاولة التحديث في الخلفية
+                // محاولة التحديث في الخلفية بأمان
                 fetch(event.request).then(response => {
-                    if (shouldCache(event.request.url) && response && response.status === 200) {
+                    if (shouldCache(event.request.url) && response && response.status === 200 && response.type === 'basic') {
+                        const responseToCache = response.clone();
                         caches.open(CACHE_NAME).then(cache => {
-                            try { cache.put(event.request, response.clone()); } catch (e) {}
+                            try { cache.put(event.request, responseToCache); } catch (e) {}
                         });
                     }
                 }).catch(() => {});
@@ -97,16 +98,17 @@ self.addEventListener('fetch', event => {
                 return cached;
             }
 
-            // إذا لم يكن في الكاش، نجلبه من الشبكة
+            // إذا لم يكن في الكاش، نجلبه من الشبكة ونخزنه بـ clone() آمن
             return fetch(event.request).then(response => {
-                if (shouldCache(event.request.url) && response && response.status === 200) {
+                if (shouldCache(event.request.url) && response && response.status === 200 && response.type === 'basic') {
+                    const responseToCache = response.clone();
                     caches.open(CACHE_NAME).then(cache => {
-                        try { cache.put(event.request, response.clone()); } catch (e) {}
+                        try { cache.put(event.request, responseToCache); } catch (e) {}
                     });
                 }
                 return response;
             }).catch(() => {
-                // إذا فشل كل شيء
+                // إذا فشل كل شيء وتوقف الاتصال (Offline)
                 if (event.request.destination === 'document') {
                     return new Response(
                         `<!DOCTYPE html>
