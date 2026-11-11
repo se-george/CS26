@@ -1,5 +1,5 @@
 /* ========================================
-   sw.js - Service Worker (المحسن والآمن)
+   sw.js - Service Worker
    ======================================== */
 const CACHE_NAME = 'semester-1-cache-v62';
 const urlsToCache = [
