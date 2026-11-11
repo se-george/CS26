@@ -413,32 +413,37 @@ export function updateDynamicSizes() {
     if (!mainSvg) return;
 
     const allImages = mainSvg.querySelectorAll('image[width][height]');
-    console.log(`📏 عدد جميع الصور: ${allImages.length}`);
-    if (allImages.length === 0) {
-        console.warn('⚠️ لم يتم العثور على صور');
-        return;
-    }
+    if (allImages.length === 0) return;
 
-    let maxX = 0;
-    let maxY = 2454;
+    let maxX = 0, maxY = 0;
+
     allImages.forEach(img => {
-        const g = img.closest('g[transform]');
-        let translateX = 0;
-        if (g) {
-            const transform = g.getAttribute('transform');
-            const match = transform.match(/translate\s*\(([\d.-]+)(?:[ ,]+([\d.-]+))?\s*\)/);
-            if (match) {
-                translateX = parseFloat(match[1]) || 0;
+        // اجمع كل translate من كل الآباء لحد الـ svg
+        let tx = 0, ty = 0;
+        let el = img.parentElement;
+        while (el && el !== mainSvg) {
+            const t = el.getAttribute && el.getAttribute('transform');
+            if (t) {
+                const m = t.match(/translate\s*\(\s*([\d.eE+-]+)(?:[ ,]+([\d.eE+-]+))?\s*\)/);
+                if (m) {
+                    tx += parseFloat(m[1]) || 0;
+                    ty += parseFloat(m[2]) || 0;
+                }
             }
+            el = el.parentElement;
         }
-        const imgWidth = parseFloat(img.getAttribute('width')) || 0;
-        const imgHeight = parseFloat(img.getAttribute('height')) || 0;
-        const imgX = parseFloat(img.getAttribute('x')) || 0;
-        const totalX = translateX + imgX + imgWidth;
-        if (totalX > maxX) maxX = totalX;
-        if (imgHeight > maxY) maxY = imgHeight;
+
+        const w = parseFloat(img.getAttribute('width'))  || 0;
+        const h = parseFloat(img.getAttribute('height')) || 0;
+        const x = parseFloat(img.getAttribute('x'))      || 0;
+        const y = parseFloat(img.getAttribute('y'))      || 0;
+
+        const right  = tx + x + w;
+        const bottom = ty + y + h;
+        if (right  > maxX) maxX = right;
+        if (bottom > maxY) maxY = bottom;
     });
 
     mainSvg.setAttribute('viewBox', `0 0 ${maxX} ${maxY}`);
-    console.log(`✅ viewBox محدّث ديناميكيًا: 0 0 ${maxX} ${maxY}`);
+    console.log(`✅ viewBox: 0 0 ${maxX} ${maxY}`);
 }
