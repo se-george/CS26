@@ -1,7 +1,7 @@
 {
-  "name": "خريطة المنهج الطبي - سيمستر 4",
-  "short_name": "S4 Map",
-  "description": "خريطة تفاعلية لعرض محاضرات وسكاشن الفرقة الثانية",
+  "name": "خريطة المنهج - s1",
+  "short_name": "S1 Map",
+  "description": "خريطة تفاعلية لعرض محاضرات وسكاشن الفرقة الأولي",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
