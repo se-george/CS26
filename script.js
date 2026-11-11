@@ -179,3 +179,42 @@ if (hoverSwitch) {
 });
 
 export { scan };
+// ==========================================
+// PWA Install Prompt Handler
+// ==========================================
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  // منع المتصفح من إظهار البانر الافتراضي
+  e.preventDefault();
+  deferredPrompt = e;
+  
+  // ابحث عن الزرار في الصفحة (تأكد إن الـ ID بتاع الزرار عندك مطابق لـ pwa-install-btn أو غيره)
+  const installBtn = document.getElementById('pwa-install-btn');
+  if (installBtn) {
+    installBtn.style.display = 'inline-flex'; // أو block حسب تصميمك
+    
+    installBtn.addEventListener('click', () => {
+      installBtn.style.display = 'none';
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('✅ المستخدم وافق على تثبيت التطبيق');
+        } else {
+          console.log('❌ المستخدم رفض تثبيت التطبيق');
+        }
+        deferredPrompt = null;
+      });
+    });
+  }
+});
+
+// لو التطبيق اتثبت خلاص، اخفي الزرار
+window.addEventListener('appinstalled', () => {
+  deferredPrompt = null;
+  const installBtn = document.getElementById('pwa-install-btn');
+  if (installBtn) {
+    installBtn.style.display = 'none';
+  }
+  console.log('🎉 تم تثبيت التطبيق بنجاح');
+});
