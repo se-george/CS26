@@ -1,37 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g transform="translate(10240,0)">
-    <g transform="translate(-9216,0)"><image data-src="image/F/01.webp" width="1024" height="2454"/><text x="512" y="2300" class="m">9</text>
-    <!--Sat9--><g transform="translate(0,277)">
+<g transform="translate(-9216,0)"><image data-src="image/F/01.webp" width="1024" height="2454"/><text x="512" y="2300" class="m">9</text>
+<g transform="translate(0,277)">
 <rect x="827.2" y="0" width="125.66" height="414.5" class="o" data-hrsf=""/>
 <rect x="679.788" y="0" width="145.68843216451342" height="414.55344861543693" class="o" />
 <rect x="534.5465245337214" y="0" width="145.16495592305796" height="415.49322699320345" class="o" />
-</g><!--Sun9--><g transform="translate(0,695)">
+</g><g transform="translate(0,695)">
 <rect x="408.0341006574585" y="2" width="125.93882369107479" height="585.6897158785835" class="o" />
 <rect x="148.3699948033788" y="1" width="258.4473699035799" height="584.3937840969863" class="o" />
 <rect x="0" y="-4" width="146.61237593278193" height="590.0587010832093" class="o" data-hrsf=""/>
-</g><!--tue9--><g transform="translate(0,1353)">
+</g><g transform="translate(0,1353)">
 <rect x="827.6494752160149" y="0" width="124.75120519516167" height="473.7069929754391" class="o" />
 <rect x="534.5465245337214" y="0" width="144.60666632431924" height="477.8805859339509" class="o" />
 <rect x="409.5664807518093" y="3" width="122.53148913057106" height="471.4428488698136" class="o" />
 <rect x="148.7542859665328" y="2" width="252.937" height="468.7007957443074" class="o" />
-</g><!--wed2--><g transform="translate(0,1828)">
+</g><g transform="translate(0,1828)">
 <rect x="828.7594015991425" y="0" width="123.08025518000068" height="417.6830053932194" class="o" />
 <rect x="680.3491481555021" y="0" width="148.76449302416552" height="416.2547464001673" class="o" />
 </g></g><g transform="translate(-8192,0)"><image data-src="image/F/01.webp" width="1024" height="2454"/><text x="512" y="2300" class="m">8</text>
-     <!--Sat6--><g transform="translate(0,277)">
+<g transform="translate(0,277)">
 <rect x="827.2" y="0" width="125.66" height="414.5" class="o"/>
 <rect x="679.788" y="0" width="145.68843216451342" height="414.55344861543693" class="o"/>
 <rect x="534.5465245337214" y="0" width="145.16495592305796" height="415.49322699320345" class="o"/>
-</g><!--Sun6--><g transform="translate(0,695)">
+</g><g transform="translate(0,695)">
 <rect x="408.0341006574585" y="2" width="125.93882369107479" height="585.6897158785835" class="o"/>
 <rect x="148.3699948033788" y="1" width="258.4473699035799" height="584.3937840969863" class="o" />
 <rect x="0" y="-4" width="146.61237593278193" height="590.0587010832093" class="o" />
-</g><!--tue6--><g transform="translate(0,1353)">
+</g><g transform="translate(0,1353)">
 <rect x="827.6494752160149" y="0" width="124.75120519516167" height="473.7069929754391" class="o"/>
 <rect x="534.5465245337214" y="0" width="144.60666632431924" height="477.8805859339509" class="o"/>
 <rect x="409.5664807518093" y="3" width="122.53148913057106" height="471.4428488698136" class="o"/>
 <rect x="148.7542859665328" y="2" width="252.937" height="468.7007957443074" class="x" />
-</g><!--wed6--><g transform="translate(0,1828)">
+</g><g transform="translate(0,1828)">
 <rect x="828.7594015991425" y="0" width="123.08025518000068" height="417.6830053932194" class="m l" data-hrsf="./Precalculus/Lecture/Matrix.pdf"/>
 <rect x="680.3491481555021" y="0" width="148.76449302416552" height="416.2547464001673" class="m l" data-href="./Introduction to Computing/Lecture/c_overview-am.pdf"/>
 </g></g><g transform="translate(-7168,0)"><image data-src="image/F/01.webp" width="1024" height="2454"/><text x="512" y="2300" class="m">7</text>
