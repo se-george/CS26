@@ -47,7 +47,7 @@ function autoLoadLastGroup() {
 
     const savedGroup = localStorage.getItem('selectedGroup');
 
-    if (savedGroup && /^[A-D]$/.test(savedGroup)) {
+    if (savedGroup && /^[A-F]$/.test(savedGroup)) {
         console.log(`🚀 تحميل آخر جروب تلقائياً: ${savedGroup}`);
         const groupSelectionScreen = document.getElementById('group-selection-screen');
         if (groupSelectionScreen) {
