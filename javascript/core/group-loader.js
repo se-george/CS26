@@ -128,15 +128,31 @@ export function updateLoadProgress() {
 // ---------- تحميل SVG الخاص بالمجموعة (مولَّد من البيانات) ----------
 export async function loadGroupSVG(groupLetter) {
     const groupContainer = document.getElementById('group-specific-content');
-    if (!groupContainer) {
-        console.error('❌ group-specific-content غير موجود');
-        return;
-    }
+    if (!groupContainer) return;
     groupContainer.innerHTML = '';
 
-    const weeks = GROUP_DATA[groupLetter];
-    if (!weeks) {
-        console.warn(`⚠️ لا بيانات للمجموعة ${groupLetter}`);
+    const group = GROUP_DATA[groupLetter];
+
+    // ✅ لو المجموعة مش جاهزة → رسالة واضحة
+    if (!group || !group.template) {
+        console.warn(`⚠️ المجموعة ${groupLetter} مش جاهزة بعد`);
+        groupContainer.innerHTML = `
+            <g transform="translate(0,0)">
+                <rect x="0" y="0" width="1024" height="2454" fill="#111"/>
+                <text x="512" y="800" text-anchor="middle" fill="#ffcc00"
+                      font-size="80" font-weight="bold" font-family="Arial">
+                    Group ${groupLetter}
+                </text>
+                <text x="512" y="950" text-anchor="middle" fill="#888"
+                      font-size="50" font-family="Arial">
+                    قريباً...
+                </text>
+                <text x="512" y="1050" text-anchor="middle" fill="#555"
+                      font-size="35" font-family="Arial">
+                    Coming Soon
+                </text>
+            </g>
+        `;
         loadingProgress.totalSteps = 1;
         loadingProgress.completedSteps = 1;
         updateLoadProgress();
@@ -144,13 +160,10 @@ export async function loadGroupSVG(groupLetter) {
     }
 
     try {
-        console.log(`🔄 توليد SVG للمجموعة ${groupLetter} من البيانات`);
-        groupContainer.innerHTML = generateGroupSVG(groupLetter, weeks);
-        console.log(`✅ تم توليد ${groupContainer.children.length} عنصر`);
+        groupContainer.innerHTML = generateGroupSVG(groupLetter, group);
+        console.log(`✅ توليد ${groupLetter}: ${groupContainer.children.length} عنصر`);
 
         const injectedImages = groupContainer.querySelectorAll('image[data-src]');
-        console.log(`🖼️ عدد الصور في SVG: ${injectedImages.length}`);
-
         imageUrlsToLoad = ['image/wood.webp', 'image/Upper_wood.webp'];
         injectedImages.forEach(img => {
             const src = img.getAttribute('data-src');
@@ -165,7 +178,6 @@ export async function loadGroupSVG(groupLetter) {
         loadingProgress.totalSteps = 1 + imageUrlsToLoad.length;
         loadingProgress.completedSteps = 1;
         updateLoadProgress();
-        console.log(`📋 قائمة الصور للتحميل (${imageUrlsToLoad.length}):`, imageUrlsToLoad);
     } catch (err) {
         console.error(`❌ خطأ في loadGroupSVG:`, err);
         loadingProgress.totalSteps = 1;
