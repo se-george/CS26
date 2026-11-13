@@ -7,6 +7,10 @@ import { getDisplayName, debounce, resetBrowserZoom } from './utils.js';
 import { pushNavigationState, goToWood } from './navigation.js';
 import { setCurrentGroup, setCurrentFolder, setGlobalFileTree, globalFileTree, currentGroup, currentFolder } from './state.js';
 
+// ✅ جديد: توليد SVG من البيانات
+import { generateGroupSVG } from './svg-generator.js';
+import { GROUP_DATA } from './groups-data.js';
+
 // ---------- متغيرات داخلية للتحميل ----------
 let imageUrlsToLoad = [];
 let loadingProgress = {
@@ -89,8 +93,6 @@ export function showLoadingScreen(groupLetter) {
     });
 }
 
-// ✅ hideLoadingScreen معرّفة هنا في group-loader.js فقط
-// لا يتم استيرادها من wood-interface.js لتجنب تعارض الأسماء
 export function hideLoadingScreen() {
     const loadingOverlay = document.getElementById('loading-overlay');
     if (!loadingOverlay) return;
@@ -123,7 +125,7 @@ export function updateLoadProgress() {
     if (percentage >= 80) document.getElementById('bulb-1')?.classList.add('on');
 }
 
-// ---------- تحميل SVG الخاص بالمجموعة ----------
+// ---------- تحميل SVG الخاص بالمجموعة (مولَّد ديناميكياً) ----------
 export async function loadGroupSVG(groupLetter) {
     const groupContainer = document.getElementById('group-specific-content');
     if (!groupContainer) {
@@ -132,60 +134,38 @@ export async function loadGroupSVG(groupLetter) {
     }
     groupContainer.innerHTML = '';
 
+    const weeks = GROUP_DATA[groupLetter];
+    if (!weeks) {
+        console.warn(`⚠️ لا بيانات للمجموعة ${groupLetter}`);
+        loadingProgress.totalSteps = 1;
+        loadingProgress.completedSteps = 1;
+        updateLoadProgress();
+        return;
+    }
+
     try {
-        console.log(`🔄 تحميل: groups/group-${groupLetter}.svg`);
-        const cache = await caches.open('semester-3-cache-v1');
-        let cachedResponse = await cache.match(`groups/group-${groupLetter}.svg`);
-        let response;
+        console.log(`🔄 توليد SVG للمجموعة ${groupLetter} من البيانات`);
+        groupContainer.innerHTML = generateGroupSVG(groupLetter, weeks);
+        console.log(`✅ تم توليد ${groupContainer.children.length} عنصر`);
 
-        if (cachedResponse) {
-            console.log(`✅ تم الحصول على SVG من الكاش`);
-            response = cachedResponse;
-        } else {
-            console.log(`🌐 تحميل SVG من الشبكة`);
-            response = await fetch(`groups/group-${groupLetter}.svg`);
-            if (response.ok) {
-                cache.put(`groups/group-${groupLetter}.svg`, response.clone());
+        const injectedImages = groupContainer.querySelectorAll('image[data-src]');
+        console.log(`🖼️ عدد الصور في SVG: ${injectedImages.length}`);
+
+        imageUrlsToLoad = ['image/wood.webp', 'image/Upper_wood.webp'];
+        injectedImages.forEach(img => {
+            const src = img.getAttribute('data-src');
+            if (src && !imageUrlsToLoad.includes(src)) {
+                const isGroupImage = src.includes(`image/${groupLetter}/`) ||
+                    src.includes(`logo-${groupLetter}`) ||
+                    src.includes(`logo-wood-${groupLetter}`);
+                if (isGroupImage) imageUrlsToLoad.push(src);
             }
-        }
+        });
 
-        if (!response.ok) {
-            console.warn(`⚠️ ملف SVG للمجموعة ${groupLetter} غير موجود`);
-            loadingProgress.completedSteps++;
-            updateLoadProgress();
-            return;
-        }
-
-        const svgText = await response.text();
-        const match = svgText.match(/<svg[^>]*>([\s\S]*?)<\/svg>/i);
-        if (match && match[1]) {
-            groupContainer.innerHTML = match[1];
-            console.log(`✅ تم حقن ${groupContainer.children.length} عنصر`);
-
-            const injectedImages = groupContainer.querySelectorAll('image[data-src]');
-            console.log(`🖼️ عدد الصور في SVG: ${injectedImages.length}`);
-
-            imageUrlsToLoad = ['image/wood.webp', 'image/Upper_wood.webp'];
-            injectedImages.forEach(img => {
-                const src = img.getAttribute('data-src');
-                if (src && !imageUrlsToLoad.includes(src)) {
-                    const isGroupImage = src.includes(`image/${groupLetter}/`) ||
-                        src.includes(`logo-${groupLetter}`) ||
-                        src.includes(`logo-wood-${groupLetter}`);
-                    if (isGroupImage) imageUrlsToLoad.push(src);
-                }
-            });
-
-            loadingProgress.totalSteps = 1 + imageUrlsToLoad.length;
-            loadingProgress.completedSteps = 1;
-            updateLoadProgress();
-            console.log(`📋 قائمة الصور للتحميل (${imageUrlsToLoad.length}):`, imageUrlsToLoad);
-        } else {
-            console.error('❌ فشل استخراج محتوى SVG');
-            loadingProgress.totalSteps = 1;
-            loadingProgress.completedSteps = 1;
-            updateLoadProgress();
-        }
+        loadingProgress.totalSteps = 1 + imageUrlsToLoad.length;
+        loadingProgress.completedSteps = 1;
+        updateLoadProgress();
+        console.log(`📋 قائمة الصور للتحميل (${imageUrlsToLoad.length}):`, imageUrlsToLoad);
     } catch (err) {
         console.error(`❌ خطأ في loadGroupSVG:`, err);
         loadingProgress.totalSteps = 1;
@@ -217,7 +197,6 @@ export function updateWoodLogo(groupLetter) {
 
     banner.onclick = (e) => {
         e.stopPropagation();
-        // ✅ reset zoom عند الضغط على شعار الجروب (زر تنقل)
         resetBrowserZoom();
         const groupSelectionScreen = document.getElementById('group-selection-screen');
         if (groupSelectionScreen) {
@@ -269,7 +248,6 @@ export async function initializeGroup(groupLetter) {
     showLoadingScreen(groupLetter);
     await Promise.all([fetchGlobalTree(), loadGroupSVG(groupLetter)]);
 
-    // ✅ استدعاء الدوال المحلية مباشرة (لا import ديناميكي هنا)
     updateDynamicSizes();
     await loadImages();
 }
@@ -378,22 +356,19 @@ export async function loadImages() {
 }
 
 // ---------- إنهاء التحميل ----------
-// ✅ hideLoadingScreen تُستدعى من group-loader نفسه (المعرّفة فوق)
-// ✅ updateDynamicSizes تُستدعى مباشرة كدالة محلية
 async function finishLoading() {
     loadingProgress.completedSteps = loadingProgress.totalSteps;
     loadingProgress.currentPercentage = 100;
     updateLoadProgress();
     console.log('✅ التحميل اكتمل 100% - جاري عرض المحتوى...');
 
-    // استيراد الدوال المطلوبة من الوحدات الأخرى فقط
     const { scan } = await import('../features/svg-processor.js');
     const { updateWoodInterface } = await import('../ui/wood-interface.js');
 
-    updateDynamicSizes();   // ✅ محلية من group-loader.js مباشرة
-    scan();                 // من svg-processor.js
-    updateWoodInterface();  // من wood-interface.js
-    goToWood();             // مستوردة من navigation.js في الأعلى
+    updateDynamicSizes();
+    scan();
+    updateWoodInterface();
+    goToWood();
 
     const mainSvg = document.getElementById('main-svg');
     if (mainSvg) {
@@ -402,7 +377,6 @@ async function finishLoading() {
         mainSvg.classList.add('loaded');
     }
 
-    // ✅ hideLoadingScreen المحلية مباشرة (لا استيراد من wood-interface)
     hideLoadingScreen();
     console.log('🎉 اكتمل التحميل والعرض');
 }
@@ -418,7 +392,6 @@ export function updateDynamicSizes() {
     let maxX = 0, maxY = 0;
 
     allImages.forEach(img => {
-        // اجمع كل translate من كل الآباء لحد الـ svg
         let tx = 0, ty = 0;
         let el = img.parentElement;
         while (el && el !== mainSvg) {
