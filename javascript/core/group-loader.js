@@ -1,5 +1,5 @@
 // ============================================
-// group-loader.js - تحميل المجموعات والصور و SVG
+// group-loader.js - تحميل المجموعات (بديل SVG بـ JSON/JS)
 // ============================================
 
 import { RAW_CONTENT_BASE, REPO_NAME, GITHUB_USER, TREE_API_URL, NAV_STATE } from './config.js';
@@ -7,7 +7,7 @@ import { getDisplayName, debounce, resetBrowserZoom } from './utils.js';
 import { pushNavigationState, goToWood } from './navigation.js';
 import { setCurrentGroup, setCurrentFolder, setGlobalFileTree, globalFileTree, currentGroup, currentFolder } from './state.js';
 
-// ✅ جديد: توليد SVG من البيانات
+// ✅ توليد SVG من البيانات (بدلاً من fetch لملف SVG)
 import { generateGroupSVG } from './svg-generator.js';
 import { GROUP_DATA } from './groups-data.js';
 
@@ -125,7 +125,7 @@ export function updateLoadProgress() {
     if (percentage >= 80) document.getElementById('bulb-1')?.classList.add('on');
 }
 
-// ---------- تحميل SVG الخاص بالمجموعة (مولَّد ديناميكياً) ----------
+// ---------- تحميل SVG الخاص بالمجموعة (مولَّد من البيانات) ----------
 export async function loadGroupSVG(groupLetter) {
     const groupContainer = document.getElementById('group-specific-content');
     if (!groupContainer) {
