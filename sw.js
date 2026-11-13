@@ -1,7 +1,4 @@
-/* ========================================
-   sw.js - Service Worker
-   ======================================== */
-const CACHE_NAME = 'semester-1-cache-v12';
+const CACHE_NAME = 'semester-1-cache-v11';
 const urlsToCache = [
    './',
    './index.html',
@@ -13,6 +10,9 @@ const urlsToCache = [
    './javascript/core/navigation.js',
    './javascript/core/group-loader.js',
    './javascript/core/state.js',
+   './javascript/core/day-template.js',
+   './javascript/core/groups-data.js',
+   './javascript/core/svg-generator.js',
    './javascript/ui/pdf-viewer.js',
    './javascript/ui/wood-interface.js',
    './javascript/ui/search-and-eye.js',
