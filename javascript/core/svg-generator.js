@@ -19,7 +19,7 @@ function getAttrs(item) {
 
 /** يرسم rect واحدة بصيغة المشروع (data-hrsf بدل <a>) */
 function rect(x, y, w, h, cls, href) {
-  const attr = href ? ` data-hrsf="${href}"` : '';
+  const attr = href ? ` data-href="${href}"` : '';
   return `<rect x="${x}" y="${y}" width="${w}" height="${h}" class="${cls}"${attr}/>`;
 }
 
