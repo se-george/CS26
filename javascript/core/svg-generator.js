@@ -1,7 +1,3 @@
-// ============================================
-// svg-generator.js - توليد SVG من بيانات مجموعة
-// ============================================
-
 import { WEEK_SPACING } from './groups-data.js';
 
 export function generateGroupSVG(groupLetter, group) {
