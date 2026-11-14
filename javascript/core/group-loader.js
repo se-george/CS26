@@ -32,6 +32,31 @@ export async function fetchGlobalTree() {
     }
 }
 
+//--------------تقيسم-----------------
+function renderSlot(slot, item) {
+  // الحالة العادية: 'o' أو 'x' أو {cls, href}
+  if (!Array.isArray(item)) {
+    const cls  = (item && item.cls)  || '';
+    const href = (item && item.href) || '';
+    return rect(slot.x, slot.y, slot.w, slot.h, cls, href);
+  }
+
+  // الحالة المقسمة: مصفوفة أجزاء
+  const n = item.length;
+  return item.map((part, i) => {
+    // قسّم رأسياً (فوق بعض) — لو عايز أفقياً بدّل h/w
+    const h = slot.h / n;
+    const y = slot.y + i * h;
+    return rect(slot.x, y, slot.w, h, part.cls, part.href);
+  }).join('');
+}
+
+// helper
+function rect(x, y, w, h, cls, href) {
+  const r = `<rect x="${x}" y="${y}" width="${w}" height="${h}" class="${cls}"/>`;
+  return href ? `<a href="${href}" target="_blank">${r}</a>` : r;
+}
+
 // ---------- حفظ وتحميل المجموعة ----------
 export function saveSelectedGroup(group) {
     setCurrentGroup(group);
