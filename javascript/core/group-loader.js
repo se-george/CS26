@@ -71,14 +71,6 @@ export async function fetchGlobalTree() {
 }
 
 //--------------تقيسم-----------------
-function renderSlot(slot, item) {
-  // الحالة العادية: 'o' أو 'x' أو {cls, href}
-  if (!Array.isArray(item)) {
-    const cls  = (item && item.cls)  || '';
-    const href = (item && item.href) || '';
-    return rect(slot.x, slot.y, slot.w, slot.h, cls, href);
-  }
-
   // الحالة المقسمة: مصفوفة أجزاء
   const n = item.length;
   return item.map((part, i) => {
