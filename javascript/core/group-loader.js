@@ -7,48 +7,6 @@ import { setCurrentGroup, setCurrentFolder, setGlobalFileTree, globalFileTree, c
 import { generateGroupSVG } from './svg-generator.js';
 import { GROUP_DATA } from './groups-data.js';
 
-// ------------slot--------------
-const DEFAULT_SLOT_CLASS = 'o';
-function getSlotAttrs(item) {
-  if (item == null) {
-    return { cls: DEFAULT_SLOT_CLASS, href: '' };
-  }
-  if (typeof item === 'string') {
-    return { cls: item || DEFAULT_SLOT_CLASS, href: '' };
-  }
-  return {
-    cls: item.cls || DEFAULT_SLOT_CLASS,
-    href: item.href || '',
-  };
-}
-
-/** يرسم rect واحدة، ويلفّها بـ <a> لو فيه href */
-export function rect(x, y, w, h, cls, href) {
-  const r = `<rect x="${x}" y="${y}" width="${w}" height="${h}" class="${cls}"/>`;
-  return href ? `<a href="${href}" target="_blank">${r}</a>` : r;
-}
-export function renderSlot(slot, item) {
-  // ----- حالة التقسيم: مصفوفة أجزاء -----
-  if (Array.isArray(item)) {
-    const n = item.length;
-    if (n === 0) {
-      // مصفوفة فاضية → نرسم slot الافتراضية
-      return rect(slot.x, slot.y, slot.w, slot.h, DEFAULT_SLOT_CLASS, '');
-    }
-    return item.map((part, i) => {
-      const { cls, href } = getSlotAttrs(part);
-      const h = slot.h / n;
-      const y = slot.y + i * h;
-      return rect(slot.x, y, slot.w, h, cls, href);
-    }).join('');
-  }
-
-  // ----- حالة slot واحدة -----
-  const { cls, href } = getSlotAttrs(item);
-  return rect(slot.x, slot.y, slot.w, slot.h, cls, href);
-}
-
-(fetchGlobalTree, showLoadingScreen, loadGroupSVG )
 // ---------- متغيرات داخلية للتحميل ----------
 let imageUrlsToLoad = [];
 let loadingProgress = {
@@ -68,23 +26,6 @@ export async function fetchGlobalTree() {
     } catch (err) {
         console.error("❌ خطأ في الاتصال بـ GitHub:", err);
     }
-}
-
-//--------------تقيسم-----------------
-  // الحالة المقسمة: مصفوفة أجزاء
-  const n = item.length;
-  return item.map((part, i) => {
-    // قسّم رأسياً (فوق بعض) — لو عايز أفقياً بدّل h/w
-    const h = slot.h / n;
-    const y = slot.y + i * h;
-    return rect(slot.x, y, slot.w, h, part.cls, part.href);
-  }).join('');
-}
-
-// helper
-function rect(x, y, w, h, cls, href) {
-  const r = `<rect x="${x}" y="${y}" width="${w}" height="${h}" class="${cls}"/>`;
-  return href ? `<a href="${href}" target="_blank">${r}</a>` : r;
 }
 
 // ---------- حفظ وتحميل المجموعة ----------
