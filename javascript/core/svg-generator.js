@@ -1,7 +1,55 @@
 import { WEEK_SPACING } from './groups-data.js';
 
+const DEFAULT_SLOT_CLASS = 'o';
+
+/**
+ * استخراج (cls, href) من أي شكل ممكن للـ item:
+ *  - null/undefined      → cls = 'o' افتراضي
+ *  - 'o' / 'x' (string)  → cls = نفس الـ string
+ *  - { cls?, href? }     → cls = item.cls أو 'o' لو مش موجود
+ */
+function getAttrs(item) {
+  if (item == null) return { cls: DEFAULT_SLOT_CLASS, href: '' };
+  if (typeof item === 'string') return { cls: item || DEFAULT_SLOT_CLASS, href: '' };
+  return {
+    cls: item.cls || DEFAULT_SLOT_CLASS,
+    href: item.href || '',
+  };
+}
+
+/** يرسم rect واحدة بصيغة المشروع (data-hrsf بدل <a>) */
+function rect(x, y, w, h, cls, href) {
+  const attr = href ? ` data-hrsf="${href}"` : '';
+  return `<rect x="${x}" y="${y}" width="${w}" height="${h}" class="${cls}"${attr}/>`;
+}
+
+/**
+ * يرسم slot واحدة.
+ *  - لو item مصفوفة → يقسم الـ slot رأسياً بالتساوي بين الأجزاء.
+ *  - لو مصفوفة فاضية → يرسم slot الافتراضية بكلاس 'o'.
+ *  - غير كده → rect واحدة بالكلاس/الرابط المناسب.
+ */
+function renderSlot(c, item) {
+  // حالة التقسيم
+  if (Array.isArray(item)) {
+    const n = item.length;
+    if (n === 0) {
+      return rect(c.x, c.y, c.w, c.h, DEFAULT_SLOT_CLASS, '');
+    }
+    return item.map((part, i) => {
+      const { cls, href } = getAttrs(part);
+      const h = c.h / n;
+      const y = c.y + i * h;
+      return rect(c.x, y, c.w, h, cls, href);
+    }).join('');
+  }
+
+  // حالة slot واحدة
+  const { cls, href } = getAttrs(item);
+  return rect(c.x, c.y, c.w, c.h, cls, href);
+}
+
 export function generateGroupSVG(groupLetter, group) {
-  // ✅ لازم يكون للمجموعة template (إحداثياتها الخاصة)
   if (!group || !group.template) {
     console.warn(`⚠️ المجموعة ${groupLetter} مش جاهزة (مفيش template)`);
     return '';
@@ -40,11 +88,7 @@ export function generateGroupSVG(groupLetter, group) {
       dataSlots.forEach((cell, i) => {
         const c = coords[i];
         if (!c) return;
-
-        const cls = typeof cell === 'string' ? cell : (cell.cls || 'o');
-        const href = (typeof cell === 'object' && cell.href) ? ` data-hrsf="${cell.href}"` : '';
-
-        out += `<rect x="${c.x}" y="${c.y}" width="${c.w}" height="${c.h}" class="${cls}"${href}/>`;
+        out += renderSlot(c, cell);
       });
 
       out += `</g>`;
