@@ -48,7 +48,7 @@ export function renderSlot(slot, item) {
   return rect(slot.x, slot.y, slot.w, slot.h, cls, href);
 }
 
-(fetchGlobalTree, showLoadingScreen, loadGroupSVG ...)
+(fetchGlobalTree, showLoadingScreen, loadGroupSVG )
 // ---------- متغيرات داخلية للتحميل ----------
 let imageUrlsToLoad = [];
 let loadingProgress = {
