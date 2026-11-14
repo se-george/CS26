@@ -18,7 +18,11 @@ wed: { transform: 'translate(0,1828)', slots: [
 { x: 828.759, y: 0, w: 123.080, h: 417.683 },
 { x: 680.349, y: 0, w: 148.764, h: 416.255 }]}},
 9: {
-sat: ['o','o','o'],
+  sat: [[
+{ cls: 'm l', href: './Precalculus/Lecture/Matrix.pdf' },
+{ cls: 'q l', href: './Precalculus/Lecture/Quiz1.pdf' },
+{ cls: 'r l', href: './Precalculus/Lecture/Recap.pdf' }],
+{ cls: 'm l', href: './Introduction to Computing/Lecture/c_overview-am.pdf'},'x' ]}
 sun: ['o','o','o'],
 tue: ['o','o','o','o'],
 wed: ['o','o'] },
