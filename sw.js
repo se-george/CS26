@@ -13,6 +13,8 @@ const urlsToCache = [
    './javascript/core/day-template.js',
    './javascript/core/groups-data.js',
    './javascript/core/svg-generator.js',
+   './javascript/core/groups-data.js',
+   './javascript/core/svg-generator.js',
    './javascript/ui/pdf-viewer.js',
    './javascript/ui/wood-interface.js',
    './javascript/ui/search-and-eye.js',
