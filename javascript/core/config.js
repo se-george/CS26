@@ -2,7 +2,7 @@
 // config.js - الثوابت والإعدادات العامة
 // ============================================
 
-export const REPO_NAME = "CS26";
+export const REPO_NAME = "1";
 export const GITHUB_USER = "se-george";
 
 export const NEW_API_BASE = `https://api.github.com/repos/${GITHUB_USER}/${REPO_NAME}/contents`;
