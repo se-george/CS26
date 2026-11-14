@@ -1,7 +1,3 @@
-// ============================================
-// group-loader.js - تحميل المجموعات (بديل SVG بـ JSON/JS)
-// ============================================
-
 import { RAW_CONTENT_BASE, REPO_NAME, GITHUB_USER, TREE_API_URL, NAV_STATE } from './config.js';
 import { getDisplayName, debounce, resetBrowserZoom } from './utils.js';
 import { pushNavigationState, goToWood } from './navigation.js';
